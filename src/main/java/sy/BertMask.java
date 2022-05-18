@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * @author sy
- * @date 2022/5/18 14:03
+ * @date 2022/5/2 14:03
  */
 public class BertMask {
     static BertTokenizer tokenizer;
