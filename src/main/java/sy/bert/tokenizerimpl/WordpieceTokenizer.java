@@ -15,6 +15,7 @@ public class WordpieceTokenizer implements Tokenizer {
 	private Map<String, Integer> vocab;
 	private String unk_token;
 	private int max_input_chars_per_word;
+	private List<String> specialTokensList;
 
 	public WordpieceTokenizer(Map<String, Integer> vocab, String unk_token, int max_input_chars_per_word) {
 		this.vocab = vocab;
@@ -22,15 +23,20 @@ public class WordpieceTokenizer implements Tokenizer {
 		this.max_input_chars_per_word = max_input_chars_per_word;
 	}
 
-	public WordpieceTokenizer(Map<String, Integer> vocab, String unk_token) {
+	public WordpieceTokenizer(Map<String, Integer> vocab, String unk_token, List<String> specialTokensList) {
 		this.vocab = vocab;
 		this.unk_token = unk_token;
+		this.specialTokensList = specialTokensList;
 		this.max_input_chars_per_word = 100;
 	}
 
 	@Override
 	public List<String> tokenize(String text) {
 		List<String> output_tokens = CollectionUtil.newArrayList();
+		if(this.specialTokensList.contains(text)) {
+			output_tokens.add(text);
+			return output_tokens;
+		}
 		for (String token : TokenizerUtils.whitespace_tokenize(text)) {
 			if (token.length() > max_input_chars_per_word) {
 				output_tokens.add(unk_token);

@@ -72,7 +72,7 @@ public class BertTokenizer implements Tokenizer {
 		if (do_basic_tokenize) {
 			this.basic_tokenizer = new BasicTokenizer(do_lower_case, never_split, tokenize_chinese_chars);
 		}
-		this.wordpiece_tokenizer = new WordpieceTokenizer(token_id_map, unk_token);
+		this.wordpiece_tokenizer = new WordpieceTokenizer(token_id_map, unk_token, never_split);
 	}
 
 	private Map<String, Integer> load_vocab(String vocab_file_name) throws IOException {
@@ -92,6 +92,8 @@ public class BertTokenizer implements Tokenizer {
 		} else {
 			split_tokens = wordpiece_tokenizer.tokenize(text);
 		}
+		split_tokens.add(0, "[CLS]");
+		split_tokens.add("[SEP]");
 		return split_tokens;
 	}
 

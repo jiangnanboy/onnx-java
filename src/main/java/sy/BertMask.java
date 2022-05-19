@@ -45,7 +45,7 @@ public class BertMask {
      */
     public static Triple<BertTokenizer, Map<String, OnnxTensor>, Integer> parseInputText(String text) throws Exception{
         var env = LoadModel.env;
-        List<String > tokens = tokenizer.basicTokenize(text);
+        List<String > tokens = tokenizer.tokenize(text);
 
         System.out.println(tokens);
 

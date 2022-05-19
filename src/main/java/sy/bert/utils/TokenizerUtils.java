@@ -92,12 +92,16 @@ public class TokenizerUtils {
 						if(specialTokenIndex == 0) {
 							String other = token.substring(specialToken.length());
 							output.add(specialToken);
-							output.addAll(Arrays.asList(other.split("")));
+							output.add(other);
 							return output;
 						} else {
 							String other = token.substring(0, token.indexOf(specialToken));
-							output.addAll(Arrays.asList(other.split("")));
+							output.add(other);
 							output.add(specialToken);
+							String another = token.substring(specialTokenIndex + specialToken.length());
+							if (another.length() != 0) {
+								output.add(another);
+							}
 							return output;
 						}
 					}
